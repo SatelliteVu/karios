@@ -291,6 +291,33 @@ class MatchAndPlot:
         stats = self._compute_stats(monitored_image, reference_image, points, mask)
         self._plot_ce(monitored_image, reference_image, stats)
 
+ids=[
+'20230715T065219000_visual_40_hotsat1',
+'20230716T063915000_visual_40_hotsat1',
+'20230717T080055000_visual_40_hotsat1',
+'20230720T072408000_visual_40_hotsat1',
+'20230722T070342000_visual_40_hotsat1',
+'20230722T083727000_visual_40_hotsat1',
+'20230722T225256000_visual_40_hotsat1',
+'20230723T065013000_visual_40_hotsat1',
+'20230724T063758000_visual_40_hotsat1',
+'20230725T080144000_visual_40_hotsat1',
+'20230726T061449000_visual_40_hotsat1',
+'20230727T060349000_visual_40_hotsat1',
+'20230727T073641000_visual_40_hotsat1',
+'20230728T190112000_visual_40_hotsat1',
+'20230805T072626000_visual_40_hotsat1',
+'20230809T063804000_visual_40_hotsat1',
+'20230809T081512000_visual_40_hotsat1',
+'20230812T073613000_visual_40_hotsat1',
+'20230813T072507000_visual_40_hotsat1',
+'20230813T090150000_visual_40_hotsat1',
+'20231008T215151000_visual_30_hotsat1',
+'20231007T220159000_visual_30_hotsat1',
+'20231007T085534000_visual_30_hotsat1',
+'20231007T072016000_visual_30_hotsat1',
+'20231008T070800000_visual_30_hotsat1'
+   ]
 
 def main(argv: list[str]) -> int:
     """KARIOS entry point.
@@ -303,16 +330,25 @@ def main(argv: list[str]) -> int:
       - 0 OK
 
     """
-    args = parse_args(argv)
-    configure_logging(args.debug, not args.no_log_file, args.log_file_path)
-    logger.info("Start KARIOS %s with Python %s", __version__, sys.version)
-    # set up configuration :
-    conf = Configuration(args)
-    # do the job
-    match_and_plot = MatchAndPlot(conf)
-    match_and_plot.process(args.mon, args.ref, args.mask, args.resume)
+    for id in ids:
+        try:
+            mon=f"/home/jadeconstantinou/l1b-research/preprocessed_for_karios/{id}.tiff"
+            ref=f"/home/jadeconstantinou/l1b-research/preprocessed_for_karios/{id}_s2.tiff"
+            
+            args = parse_args([mon,ref])
+           
+            configure_logging(args.debug, not args.no_log_file, args.log_file_path)
+            logger.info("Start KARIOS %s with Python %s", __version__, sys.version)
+            # set up configuration 
+            conf = Configuration(args)
+            # do the job
+            match_and_plot = MatchAndPlot(conf)
+            match_and_plot.process(mon, ref, args.mask, args.resume)
 
-    return 0
+
+        except Exception as err:
+            print(err)
+            continue
 
 
 if __name__ == "__main__":

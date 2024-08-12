@@ -121,7 +121,7 @@ class RowColShiftPlot:
             self._points["y0"],
             c=self._points[dim],
             cmap=self._config.scatter_colormap,
-            s=1,
+            s=10,
             **kwargs,
         )
         ax_scatter.legend(loc="upper left", title=f"Nb KP={len(self._points['x0'])}")

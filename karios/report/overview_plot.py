@@ -139,7 +139,7 @@ class OverviewPlot:
             }
 
         scatter = axes.scatter(
-            self._points["x0"], self._points["y0"], c=values, cmap=color_map, s=1, **kwargs
+            self._points["x0"], self._points["y0"], c=values, cmap=color_map, s=10, **kwargs
         )
         axes.grid()
         # colorbar in gridspec, thanks to this

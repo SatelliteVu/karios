@@ -34,8 +34,6 @@ def parse_args(argv: list[str]) -> Namespace:
 
     Returns:
       Namespace: parsed args:
-      - mon    Path to the monitored sensor product
-      - ref    Path to the reference sensor product
       - mask   Path to the mask (default: None)
       - conf   Configuration file path
       - out    Output results folder path

@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "karios"
+version = "0.1.0"
+description = ""
+authors = ["Daniel Evans <daniel.evans@satellitevu.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+matplotlib = "^3.8.2"
+scikit-image = "^0.22.0"
+opencv-python = "^4.8.1"
+pandas = "^2.2.2"
+gdal = {version = "3.8.3", extras = ["numpy"]}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
